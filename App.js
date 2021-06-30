@@ -1,31 +1,23 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import AuthScreen from "./src/screens/Auth";
 import AuthContext from "./src/context/AuthContext";
-import { setTokenApi, getTokenApi } from "./src/api/token";
+import { setTokenApi, getTokenApi, removeTokenApi } from "./src/api/token";
+import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [auth, setAuth] = useState(undefined);
 
   useEffect(() => {
-    setAuth(null);
+    (async () => {
+      const token = await getTokenApi();
+      console.log("Estoy logeado");
+      //Existe Token?, si existe, setAuth recibe el Token y el idUser, de lo contrario setAuth se setea en null
+      // Con jwtDecode decodifico el token de la sesion, y como la funcion jwtDecode devuelve un objeto, puedo acceder a su clave de id, o cualquier propiedad que pertenezca al objeto "token"
+      token ? setAuth({ token, idUser: jwtDecode(token).id }) : setAuth(null);
+    })();
   }, []);
-  // useEffect(() => {
-  //   // Es null porque aun no sabemos si el usuario esta logeado
-
-  //   //Como las funciones del localStorage son asincronas, se crea un afuncion autoejecutable
-  //   (async () => {
-  //     const token = await getTokenApi();
-  //     if (token) {
-  //       console.log("Estoy logeado");
-  //       console.log(token);
-  //       // setAuth("Hola");
-  //     } else {
-  //       setAuth(null);
-  //     }
-  //   })();
-  // }, []);
 
   //User viene desde el LoginForm a traves del response que se proporciona por la peticion a la API de logon de strapi
   const login = (user) => {
@@ -40,11 +32,19 @@ export default function App() {
       idUser: user.user._id,
     });
   };
+
+  const logout = () => {
+    if (auth) {
+      removeTokenApi();
+      setAuth(null);
+    }
+  };
+
   const authData = useMemo(
     () => ({
       auth,
       login,
-      logout: () => null,
+      logout,
     }),
     [auth]
   );
@@ -56,8 +56,18 @@ export default function App() {
   return (
     <AuthContext.Provider value={authData}>
       <PaperProvider>
-        {auth ? <Text>Zona de Usuarios</Text> : <AuthScreen />}
+        {auth ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text>Zona de Usuarios</Text>
+            <Button title="Cerrar Sesion" onPress={authData.logout} />
+          </View>
+        ) : (
+          <AuthScreen />
+        )}
       </PaperProvider>
     </AuthContext.Provider>
   );
 }
+ 
