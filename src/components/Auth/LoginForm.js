@@ -32,7 +32,7 @@ export default function LoginForm(props) {
         //La respuesta viajara directo al componente padre APP.js, por lo que estariamos mandando props desde
         // un componente hijo a un componente padre, esta es una manera de poder pasar props hacia componentes superiores o padres
         // mediante una funcion externa importada mediante destructuring como se puede observar en la parte superior de la hoja del codigo
-        //donde se llama al hook personalizado o custom que se creo en la carpeta hooks **useAuth()**
+        //donde se llama al hook personalizado o custom que se creo en la carpeta ../hooks/**useAuth()**
         login(response);
         // console.log(response);
       } catch (error) {
