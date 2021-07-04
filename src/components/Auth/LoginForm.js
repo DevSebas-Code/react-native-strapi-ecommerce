@@ -26,13 +26,15 @@ export default function LoginForm(props) {
     onSubmit: async (formData) => {
       try {
         setLoading(true);
+        
         // Se declara la respuesta de la peticion a la API de Strapi
-        const response = await loginApi(formData);
-        if (response.statusCode) throw "Error en el usuario o contraseña";
         //La respuesta viajara directo al componente padre APP.js, por lo que estariamos mandando props desde
         // un componente hijo a un componente padre, esta es una manera de poder pasar props hacia componentes superiores o padres
         // mediante una funcion externa importada mediante destructuring como se puede observar en la parte superior de la hoja del codigo
         //donde se llama al hook personalizado o custom que se creo en la carpeta ../hooks/**useAuth()**
+
+        const response = await loginApi(formData);
+        if (response.statusCode) throw "Error en el usuario o contraseña";
         login(response);
         // console.log(response);
       } catch (error) {
@@ -40,14 +42,6 @@ export default function LoginForm(props) {
           position: Toast.positions.CENTER,
         });
       }
-
-      // Desmonto el componente
-      // const main = document.querySelector("main");
-      // ReactDOM.render(React.createElement(LoginForm), main);
-      // setTimeout(() => ReactDOM.unmountComponentAtNode(main), 1);
-      // setLoading(false);
-
-      // console.log(formData);
     },
   });
 

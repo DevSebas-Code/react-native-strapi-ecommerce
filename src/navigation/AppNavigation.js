@@ -32,28 +32,28 @@ export default function AppNavigation() {
         <Tab.Screen
           name="home"
           component={Home}
-          option={{
+          options={{
             title: "Inicio",
           }}
         />
         <Tab.Screen
           name="favorites"
           component={Favorites}
-          option={{
+          options={{
             title: "Favoritos",
           }}
         />
         <Tab.Screen
           name="cart"
           component={Cart}
-          option={{
+          options={{
             title: "Carrito",
           }}
         />
         <Tab.Screen
           name="account"
           component={Account}
-          option={{
+          options={{
             title: "Mi cuenta",
           }}
         />
@@ -61,18 +61,32 @@ export default function AppNavigation() {
     </NavigationContainer>
   );
 }
-
-const setIcon = (route, routeStatus) => {
-  console.log(route);
-  console.log("########");
-  console.log("########");
- 
-  console.log(routeStatus);
-  return null;
-};
+function setIcon(route, routeStatus) {
+  let iconName = "";
+  switch (route.name) {
+    case "home":
+      iconName = "home";
+      break;
+    case "favorites":
+      iconName = "heart";
+      break;
+    case "cart":
+      iconName = "shopping-cart";
+      break;
+    case "account":
+      iconName = "bars" 
+    default:
+      break;
+  }
+  return <AwesomeIcon name={iconName} style={styles.icon} />;
+}
 
 const styles = StyleSheet.create({
   navigation: {
     backgroundColor: colors.bgDark,
+  },
+  icon: {
+    fontSize: 20,
+    color: colors.fontLight,
   },
 });
