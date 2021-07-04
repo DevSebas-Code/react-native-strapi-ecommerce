@@ -5,6 +5,7 @@ import AuthScreen from "./src/screens/Auth";
 import AuthContext from "./src/context/AuthContext";
 import { setTokenApi, getTokenApi, removeTokenApi } from "./src/api/token";
 import jwtDecode from "jwt-decode";
+import AppNavigation from "./src/navigation/AppNavigation";
 
 export default function App() {
   const [auth, setAuth] = useState(undefined);
@@ -57,12 +58,7 @@ export default function App() {
     <AuthContext.Provider value={authData}>
       <PaperProvider>
         {auth ? (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text>Zona de Usuarios</Text>
-            <Button title="Cerrar Sesion" onPress={authData.logout} />
-          </View>
+          <AppNavigation/>
         ) : (
           <AuthScreen />
         )}
@@ -70,4 +66,3 @@ export default function App() {
     </AuthContext.Provider>
   );
 }
- 
