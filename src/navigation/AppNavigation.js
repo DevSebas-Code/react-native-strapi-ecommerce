@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Home from "../screens/Home";
 import Favorites from "../screens/Favorites";
+import AccountStack from "./AccountStack";
 import Cart from "../screens/Cart";
-import Account from "../screens/Account";
 import AwesomeIcon from "react-native-vector-icons/FontAwesome";
 import colors from "../styles/colors";
 //La variable Tab, llama a la FN createMaterialBottomTabNavigator()
@@ -23,6 +23,7 @@ export default function AppNavigation() {
     <NavigationContainer>
       <Tab.Navigator
         barStyle={styles.navigation}
+        //Accedo a la route mediante destructuring
         screenOptions={({ route }) => ({
           tabBarIcon: (routeStatus) => {
             return setIcon(route, routeStatus);
@@ -52,7 +53,7 @@ export default function AppNavigation() {
         />
         <Tab.Screen
           name="account"
-          component={Account}
+          component={AccountStack}
           options={{
             title: "Mi cuenta",
           }}
@@ -61,6 +62,7 @@ export default function AppNavigation() {
     </NavigationContainer>
   );
 }
+
 function setIcon(route, routeStatus) {
   let iconName = "";
   switch (route.name) {

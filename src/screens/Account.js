@@ -1,18 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, ScrollView, Text } from "react-native";
+import Search from "../components/Search";
 
 export default function Account() {
   return (
-    <View style={styles.container}>
-      <Text>Estamos en Mi cuenta</Text>
-    </View>
+    <>
+      <Search />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <Text>Estamos en Mi cuenta</Text>
+      </ScrollView>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

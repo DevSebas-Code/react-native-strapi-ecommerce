@@ -15,7 +15,7 @@ export default function LoginForm(props) {
   // const debugForm = () =::
   const [loading, setLoading] = useState(false);
 
-  // Declaramos el hook personalizado para la autenticación
+  // Declaramos el hook personalizado para la autenticación y se accede a la funcion de login()  por medio de destructuring
   const { login } = useAuth();
 
   console.log(login);
