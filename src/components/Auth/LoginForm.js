@@ -17,7 +17,7 @@ export default function LoginForm(props) {
 
   // Declaramos el hook personalizado para la autenticación y se accede a la funcion de login()  por medio de destructuring
   const { login } = useAuth();
-
+ 
   console.log(login);
 
   const formik = useFormik({
@@ -59,7 +59,7 @@ export default function LoginForm(props) {
         style={formStyle.input}
         onChangeText={(text) => formik.setFieldValue("password", text)}
         value={formik.values.password}
-        error={formik.errors.pas}
+        error={formik.errors.password}
         secureTextEntry
       />
       <RootSiblingParent>

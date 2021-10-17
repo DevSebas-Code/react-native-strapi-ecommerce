@@ -1,13 +1,20 @@
 import React from "react";
-import { StatusBar, SafeAreaView } from "react-native";
+import { StatusBar } from "react-native";
 
-export default function StatusBar() {
-    const {backgoundColor, ...rest} =  props;
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function StatusBarCustom(props) {
+  const { backgroundColor, ...rest } = props;
+  
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <>
+      <StatusBar backgroundColor={backgroundColor} {...rest} />
+      <SafeAreaView
+        style={{
+          flex: 0,
+          backgroundColor: backgroundColor,
+        }}
+      />
+    </>
   );
 }
-
-
