@@ -13,10 +13,19 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const token = await getTokenApi();
-      console.log("Estoy logeado");
+   
+
+      
       //Existe Token?, si existe, setAuth recibe el Token y el idUser, de lo contrario setAuth se setea en null
       // Con jwtDecode decodifico el token de la sesion, y como la funcion jwtDecode devuelve un objeto, puedo acceder a su clave de id, o cualquier propiedad que pertenezca al objeto "token"
-      token ? setAuth({ token, idUser: jwtDecode(token).id }) : setAuth(null);
+      if(token){
+        setAuth({
+          token,
+          idUser: jwtDecode(token).id,
+        })
+      }else{
+        setAuth(null)
+      }
     })();
   }, []);
 
@@ -30,7 +39,7 @@ export default function App() {
     setAuth({
       token: user.jwt,
       //Rescato el id del user que realiza el login por medio de la propiedad del objeto hijo user del response que me devuelve strapi
-      idUser: user.user._id,
+      idUser: user.user.id,
     });
   };
 
@@ -50,18 +59,16 @@ export default function App() {
     [auth]
   );
 
-  if (auth === undefined) {
-    return null;
-  }
+  if (auth === undefined) return null;
 
   return (
     <AuthContext.Provider value={authData}>
       <PaperProvider>
-        {auth ? (
+        {auth ? 
           <AppNavigation/>
-        ) : (
+         : 
           <AuthScreen />
-        )}
+        }
       </PaperProvider>
     </AuthContext.Provider>
   );
