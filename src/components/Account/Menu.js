@@ -19,7 +19,7 @@ export default function Menu() {
                 },
                 {
                     text: "SI",
-                    onPress: () => console.log(logout), 
+                    onPress: () => logout(), 
                     
                 }
             ],
@@ -39,7 +39,7 @@ export default function Menu() {
                     title="Cambiar nombre"
                     description="Cambia tu nombre"
                     left={(props) => <List.Icon {...props} icon="face" />}
-                    onPress={() => console.log("Ir a cambiar el nombre")}
+                    onPress={() => navigation.navigate("change-name")}
                 />
                 <List.Item
                     title="Cambiar Email"
