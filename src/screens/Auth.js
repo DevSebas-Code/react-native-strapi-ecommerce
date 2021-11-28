@@ -27,7 +27,7 @@ export default function Auth() {
       <Video
         ref={video}
         style={styles.video}
-        source={require('./pexels-henry-5396826.mp4')}
+        source={require('./video.mp4')}
         resizeMode="cover"
         isLooping
         shouldPlay={true}
@@ -53,9 +53,10 @@ export default function Auth() {
 const styles = StyleSheet.create({
   logo: {
     width: "100%",
-    height: 250,
+    height: 300,
     resizeMode: "contain",
     marginBottom: 20,
+    bottom: 30
   },
   video: {
     position: 'absolute',

@@ -1,18 +1,19 @@
 import React, { useCallback, useState } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { formStyle } from '../../styles'
 import { useFormik } from "formik"
 import { getMeApi, updateUserApi } from '../../api/user'
 import useAuth from '../../hooks/useAuth'
-
 import * as Yup from "yup"
+import Toast from "react-native-root-toast"
+import { RootSiblingParent } from "react-native-root-siblings";
 
 export default function ChangeName() {
     const [loading, setLoading] = useState(false)
     const { auth } = useAuth()
-
+    const navigation = useNavigation()
     // Cada vez que accedamos a la Screen Changename realizamos una peticion a la BD para chequear la ultima información
 
     useFocusEffect(
@@ -34,10 +35,16 @@ export default function ChangeName() {
             setLoading(true);
             try {
                 await updateUserApi(auth, formData);
+                navigation.goBack()
+                console.log("OK");
             } catch (error) {
+                console.log("ERROR");
+                Toast.show("Error al actualizar los datos",{
+                    position: Toast.positions.CENTER,
+                })
                 console.log(error)
+                setLoading(false);
             }
-            setLoading(false);
         }
     })
     return (
@@ -56,6 +63,7 @@ export default function ChangeName() {
                 value={formik.values.lastname}
                 error={formik.errors.lastname}
             />
+            
             <Button
                 mode="contained"
                 style={formStyle.btnSucces}

@@ -46,7 +46,7 @@ export default function LoginForm(props) {
 
         // console.log(response);
       } catch (error) {
-        11
+
         Toast.show(error, {
           position: Toast.positions.CENTER,
         });
@@ -58,22 +58,22 @@ export default function LoginForm(props) {
 
     <View>
 
-    
+
       <TextInput
         label="Email o Nombre de usuario "
         selectionColor="#fff"
         outlineColor="#fff"
-        style={formStyle.input}
-        theme={{colors : {text : formStyle.input.color}}}
+        style={styles.input}
         onChangeText={(text) => formik.setFieldValue("identifier", text)}
+        theme={{ colors: { text: "#f5f5f5", accent: "#ffffff", primary: "#a3d1ff", placeholder: "#f5f5f5", background: "transparent" } }} underlineColor="#f5f5f5" underlineColorAndroid="#f5f5f5"
         value={formik.values.identifier}
         error={formik.errors.identifier}
       />
       <TextInput
         label="Contraseña"
-        style={formStyle.input}
+        style={styles.input}
         onChangeText={(text) => formik.setFieldValue("password", text)}
-        theme={{colors : {text : formStyle.input.color}}}
+        theme={{ colors: { text: "#f5f5f5", accent: "#ffffff", primary: "#a3d1ff", placeholder: "#f5f5f5", background: "transparent" } }} underlineColor="#f5f5f5" underlineColorAndroid="#f5f5f5"
         value={formik.values.password}
         error={formik.errors.password}
         secureTextEntry
@@ -81,7 +81,7 @@ export default function LoginForm(props) {
       <RootSiblingParent>
         <Button
           mode="contained"
-          style={formStyle.btnSucces}
+          style={styles.btnLogin}
           onPress={formik.handleSubmit}
           loading={loading}
         >
@@ -115,4 +115,14 @@ function validationSchema() {
   };
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    color: '#fff'
+  },
+  btnLogin : {
+    padding: 5,
+    backgroundColor:" rgba(0,152,211,0.4)",
+  }
+})
