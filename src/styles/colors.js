@@ -6,6 +6,7 @@ const colors = {
   //Backgrounds
   bgLight: "#fff",
   bgDark: "#16222b",
+  danger: "#f00"
 
 };
 

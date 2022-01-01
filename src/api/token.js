@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TOKEN } from "../utils/constants";
-console.log(AsyncStorage.removeItem);
+// console.log(AsyncStorage.removeItem);
 
 
 export async function setTokenApi(token) {

@@ -11,7 +11,7 @@ import formStyles from '../../styles/form'
 import * as Yup from "yup"
 
 export default function ChangePassword() {
-    const { auth } = useAuth()
+    const { auth, logout } = useAuth()
     const [loading, setLoading] = useState(false)
     const navigation = useNavigation()
 
@@ -24,7 +24,8 @@ export default function ChangePassword() {
             try {
                 const response = await updateUserApi(auth, FormData)
                 if(response.statusCode) throw "Error al cambiar la contraseña"
-                navigation.goBack()
+                logout()
+                // navigation.goBack()
             } catch (error) {
                 Toast.show(error,{
                     position: Toast.positions.CENTER

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   View,
   Text,
@@ -14,11 +14,13 @@ import { layoutStyle } from "../styles";
 import LoginForm from "../components/Auth/LoginForm";
 import RegisterForm from "../components/Auth/RegisterForm";
 import {Video} from 'expo-av'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Auth() {
   // Este estado permitira determinar si se muestra el formulario de registro o el formulario de login
   const [showLogin, setShowLogin] = useState(true);
   const video = React.useRef(null);
+  const [status, setStatus] = useState({})
   const changeForm = () => setShowLogin(!showLogin);
 
   return (
@@ -31,26 +33,30 @@ export default function Auth() {
         resizeMode="cover"
         isLooping
         shouldPlay={true}
-        
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
       />
       <Image style={styles.logo} source={logo} />
 
       {/* Plaform.OS devuelve el OS del usuario, si es IOS aplica padding, si no, aplica height para el caso de Android */}
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      <KeyboardAwareScrollView
+      enableOnAndroid={true}
+     
       >
         {showLogin ? (
           <LoginForm changeForm={changeForm} />
         ) : (
           <RegisterForm changeForm={changeForm} />
         )}
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1
+  },
   logo: {
     width: "100%",
     height: 300,

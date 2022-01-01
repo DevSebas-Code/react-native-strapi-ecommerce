@@ -22,7 +22,7 @@ export default function LoginForm(props) {
   // Declaramos el hook personalizado para la autenticación y se accede a la funcion de login()  por medio de destructuring
   const { login } = useAuth();
 
-  console.log(login);
+  // console.log(login);
 
   const formik = useFormik({
     initialValues: initialValues(),

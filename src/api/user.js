@@ -5,7 +5,7 @@ export async function registerApi(formData) {
   try {
     //Endpoint de Strapi para el registro
     const url = `${API_URL}/auth/local/register`;
-    console.log(API_URL);
+    // console.log(API_URL);
     const params = {
       method: "POST",
       headers: {
@@ -84,3 +84,10 @@ export async function updateUserApi(auth, formData) {
     return error
   }
 }
+
+
+// export async function updateAdressApi(auth, formdata){
+//   try{
+//     const url = `${API_URL}/`
+//   }
+// }

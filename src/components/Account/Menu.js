@@ -63,7 +63,7 @@ export default function Menu() {
                     title="Mis direcciones"
                     description="Gestionar mis direcciones"
                     left={(props) => <List.Icon {...props} icon="map" />}
-                    onPress={() => console.log("Gestionar mis direcciones")}
+                    onPress={() => navigation.navigate("addresses")}
                 />
             </List.Section>
             <List.Section>
