@@ -18,7 +18,6 @@ export default function Account() {
     useCallback(() => {
       (async () => {
         const response = await getMeApi(auth.token);
-        console.log("auth.token: ", auth.token)
         setUser(response);
       })();
     }, [])

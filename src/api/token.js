@@ -24,8 +24,6 @@ export async function getTokenApi() {
 
 export async function removeTokenApi() {
   try {
-  
-    console.log("pase por remover el token")
     await AsyncStorage.removeItem(TOKEN);
     return true;
   } catch (e) {

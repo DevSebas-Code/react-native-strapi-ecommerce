@@ -31,7 +31,7 @@ export default function App() {
 
   //User viene desde el LoginForm a traves del response que se proporciona por la peticion a la API de logon de strapi
   const login = (user) => {
-    console.log(user);
+   
     // JWT: Json Web Token,
     // Rescato el JWT accediendo a la propiedad JWT del objeto padre user, del response que me devuelve strapi
     setTokenApi(user.jwt);

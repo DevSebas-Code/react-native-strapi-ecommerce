@@ -40,7 +40,7 @@ export default function Auth() {
       {/* Plaform.OS devuelve el OS del usuario, si es IOS aplica padding, si no, aplica height para el caso de Android */}
 
       <KeyboardAwareScrollView
-      enableOnAndroid={true}
+        extraScrollHeight={25}
      
       >
         {showLogin ? (
