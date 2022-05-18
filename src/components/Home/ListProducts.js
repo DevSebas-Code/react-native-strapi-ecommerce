@@ -3,6 +3,7 @@ import React from 'react'
 import { API_URL } from "../../utils/constants"
 import { useNavigation } from '@react-navigation/native'
 import { map } from 'lodash'
+import { shadow } from 'react-native-paper'
 
 export default function ListProducts(props) {
 
@@ -21,7 +22,7 @@ export default function ListProducts(props) {
                     key={product._id}
                     onPress={() => goToProduct(product._id)}
                 >
-                    <View style={styles.containerProduct}>
+                    <View style={[styles.containerProduct, styles.shadowProp]}>
                         <View style={styles.product}>
                             <Image
                                 style={styles.image}
@@ -46,23 +47,33 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         alignItems: "flex-start",
-        margin: -3
+        margin: 5,
+      
     },
     containerProduct: {
         width: "50%",
         padding: 3,
-
+        marginTop: 10,
     },
     product: {
-        backgroundColor: "#f0f0f0",
-        padding: 10
+        backgroundColor: "rgba(40, 40, 40, 0.8)",
+        padding: 10,
+        borderRadius: 28,
     },
     image: {
         height: 150,
-        resizeMode: "contain"
+        resizeMode: "contain",
+        borderRadius: 50
     },
     name: {
         marginTop: 15,
-        fontSize: 17
-    }
+        fontSize: 17,
+        color: '#fff'
+    },
+    shadowProp: {
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+      }
 })
