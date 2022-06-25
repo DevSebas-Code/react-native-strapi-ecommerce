@@ -5,6 +5,18 @@ export const AnimatedIcon = Animated.createAnimatedComponent(AwesomeIcon);
 
 const animVal = new Animated.Value(0);
 
+
+export const arrowAnimation = {
+  transform: [
+    {
+      translateX: animVal.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-100,5]
+      })
+    }
+  ]
+}
+
 export const inputAnimationWidth = animVal.interpolate({
   inputRange: [0, 1],
   outputRange: ["100%", "90%"],

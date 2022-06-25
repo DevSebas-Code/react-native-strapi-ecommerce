@@ -9,12 +9,9 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { loginApi } from "../../api/user";
 import * as Yup from "yup";
 
-
-
 export default function LoginForm(props) {
   // console.log(props);
   const { changeForm } = props;
-
 
   // const debugForm = () =::
   const [loading, setLoading] = useState(false);
@@ -37,7 +34,7 @@ export default function LoginForm(props) {
         // mediante una funcion externa importada mediante destructuring como se puede observar en la parte superior de la hoja del codigo
         //donde se llama al hook personalizado o custom que se creo en la carpeta ../hooks/**useAuth()**
 
-        setLoading(true)
+        setLoading(true);
         const response = await loginApi(formData);
         setLoading(false);
         if (response.statusCode) throw "Error en el usuario o contraseña";
@@ -46,7 +43,6 @@ export default function LoginForm(props) {
 
         // console.log(response);
       } catch (error) {
-
         Toast.show(error, {
           position: Toast.positions.CENTER,
         });
@@ -55,17 +51,24 @@ export default function LoginForm(props) {
   });
 
   return (
-
     <View>
-
-
       <TextInput
         label="Email o Nombre de usuario "
         selectionColor="#fff"
         outlineColor="#fff"
         style={styles.input}
         onChangeText={(text) => formik.setFieldValue("identifier", text)}
-        theme={{ colors: { text: "#f5f5f5", accent: "#ffffff", primary: "#a3d1ff", placeholder: "#f5f5f5", background: "transparent" } }} underlineColor="#f5f5f5" underlineColorAndroid="#f5f5f5"
+        theme={{
+          colors: {
+            text: "#f5f5f5",
+            accent: "#ffffff",
+            primary: "#a3d1ff",
+            placeholder: "#f5f5f5",
+            background: "transparent",
+          },
+        }}
+        underlineColor="#f5f5f5"
+        underlineColorAndroid="#f5f5f5"
         value={formik.values.identifier}
         error={formik.errors.identifier}
       />
@@ -73,7 +76,17 @@ export default function LoginForm(props) {
         label="Contraseña"
         style={styles.input}
         onChangeText={(text) => formik.setFieldValue("password", text)}
-        theme={{ colors: { text: "#f5f5f5", accent: "#ffffff", primary: "#a3d1ff", placeholder: "#f5f5f5", background: "transparent" } }} underlineColor="#f5f5f5" underlineColorAndroid="#f5f5f5"
+        theme={{
+          colors: {
+            text: "#f5f5f5",
+            accent: "#ffffff",
+            primary: "#a3d1ff",
+            placeholder: "#f5f5f5",
+            background: "transparent",
+          },
+        }}
+        underlineColor="#f5f5f5"
+        underlineColorAndroid="#f5f5f5"
         value={formik.values.password}
         error={formik.errors.password}
         secureTextEntry
@@ -118,11 +131,13 @@ function validationSchema() {
 const styles = StyleSheet.create({
   input: {
     marginBottom: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    color: '#fff'
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    color: "#fff",
   },
-  btnLogin : {
+  btnLogin: {
+    borderRadius: 50,
     padding: 5,
-    backgroundColor:" rgba(0,152,211,0.4)",
-  }
-})
+    backgroundColor: "rgba(63, 3, 189, 0.8)"
+    // backgroundColor: " rgba(0,152,211,0.6)",
+  },
+});

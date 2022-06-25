@@ -3,7 +3,7 @@ import React from 'react'
 import { API_URL } from "../../utils/constants"
 import { useNavigation } from '@react-navigation/native'
 import { map } from 'lodash'
-import { shadow } from 'react-native-paper'
+
 
 export default function ListProducts(props) {
 
@@ -11,6 +11,7 @@ export default function ListProducts(props) {
     const navigation = useNavigation()
 
     const goToProduct = (id) => {
+       
         // We're using navigation.push(). to always overlap a new stack on top of each other with the new Product Id
         navigation.push("product", { idProduct : id })
     }
@@ -56,9 +57,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     product: {
-        backgroundColor: "rgba(40, 40, 40, 0.8)",
+        backgroundColor: "black",
         padding: 10,
-        borderRadius: 28,
+        borderRadius: 30,
     },
     image: {
         height: 150,
