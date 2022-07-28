@@ -22,6 +22,7 @@ export default function Product(props) {
 
     useEffect(() => {
         (async () => {
+            setProduct(null);
             const response = await getProductApi(params.idProduct)
             setProduct(response)
 
