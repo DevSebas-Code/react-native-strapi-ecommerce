@@ -2,11 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { size, map, filter } from "lodash";
 
-import { API_URL, CART } from "../utils/constants";
+import { CART } from "../utils/constants";
 
 export async function getProductCartApi() {
+  // await AsyncStorage.removeItem(CART)
   try {
-    const cart = await  AsyncStorage.getItem(CART);
+    const cart = await AsyncStorage.getItem(CART);
     console.log("CART GET : ", cart);
     if (!cart) return [];
     console.log("JSON.parse: ", JSON.parse(cart));
@@ -20,9 +21,9 @@ export async function getProductCartApi() {
 export async function addProductCartApi(idProduct, quantity) {
   console.log("idProduct: " + idProduct);
   console.log("quantity: " + quantity);
-  try { 
+  try {
     const cart = await getProductCartApi();
-    if(!cart) throw "Error al obtener el carrito"
+    if (!cart) throw "Error al obtener el carrito";
     if (size(cart) === 0) {
       cart.push({
         idProduct,
@@ -50,5 +51,19 @@ export async function addProductCartApi(idProduct, quantity) {
   } catch (error) {
     console.log(error);
     return false;
+  }
+}
+
+export async function deleteProductCartApi(idProduct) {
+  try {
+    const cart = await getProductCartApi();
+    const newCart = filter(cart, (product) => {
+      return product.idProduct !== idProduct;
+    });
+    await AsyncStorage.setItem(CART, JSON.stringify(newCart));
+    return true;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 }

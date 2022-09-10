@@ -1,7 +1,9 @@
-import React from "react";
+import Reac,{useEffect} from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
-import { addProductCartApi } from "../../api/cart";
+import { addProductCartApi, getProductCartApi } from "../../api/cart";
+
+
 
 
 import Toast from "react-native-root-toast";

@@ -6,4 +6,5 @@
 export const API_URL = "http://192.168.1.86:8081";
 export const TOKEN = "token";
 export const SEARCH_HISTORY="search-history"
+
 export const CART = "cart"

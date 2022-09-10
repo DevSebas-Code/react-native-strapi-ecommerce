@@ -8,6 +8,7 @@ import { deleteFavoriteApi } from "../../api/favorite";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Product({ item, setReloadFavorites }) {
+  
   const navigation = useNavigation();
   const { auth } = useAuth();
   const [loading, setLoading] = useState(false)
@@ -26,7 +27,7 @@ export default function Product({ item, setReloadFavorites }) {
     if (!discount) return price;
 
     const discountAmount = (price * discount) / 100;
-    return (price - discountAmount).toFixed(2).concat(0);
+    return (price - discountAmount).toFixed(3);
   };
 
   return (
