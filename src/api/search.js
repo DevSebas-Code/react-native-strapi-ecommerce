@@ -7,7 +7,6 @@ export async function getSearchHistoryApi() {
   try {
     const history = await AsyncStorage.getItem(SEARCH_HISTORY);
     if (!history) return [];
-    console.log(JSON.parse(history));
     return sortArrayByDate(JSON.parse(history));
   } catch (error) {
     console.log(error);

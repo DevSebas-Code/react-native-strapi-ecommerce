@@ -8,9 +8,7 @@ export async function getProductCartApi() {
   // await AsyncStorage.removeItem(CART)
   try {
     const cart = await AsyncStorage.getItem(CART);
-    console.log("CART GET : ", cart);
     if (!cart) return [];
-    console.log("JSON.parse: ", JSON.parse(cart));
     return JSON.parse(cart);
   } catch (error) {
     console.log(error);
@@ -19,8 +17,6 @@ export async function getProductCartApi() {
 }
 
 export async function addProductCartApi(idProduct, quantity) {
-  console.log("idProduct: " + idProduct);
-  console.log("quantity: " + quantity);
   try {
     const cart = await getProductCartApi();
     if (!cart) throw "Error al obtener el carrito";
@@ -62,6 +58,51 @@ export async function deleteProductCartApi(idProduct) {
     });
     await AsyncStorage.setItem(CART, JSON.stringify(newCart));
     return true;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function increaseProductCartApi(idProduct) {
+  try {
+    const cart = await getProductCartApi();
+    map(cart, (product) => {
+      if (product.idProduct === idProduct) {
+        return (product.quantity += 1);
+      }
+    });
+    await AsyncStorage.setItem(CART, JSON.stringify(cart));
+    return true;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function decreaseProductCartApi(idProduct) {
+  let isDelete = false;
+
+  try {
+    const cart = await getProductCartApi();
+    map(cart, (product) => {
+      if (product.idProduct === idProduct) {
+        if (product.quantity === 1) {
+          isDelete = true;
+          return null;
+        } else {
+          return (product.quantity -= 1);
+        }
+      }
+    });
+
+
+    if(isDelete) {
+      await deleteProductCartApi(idProduct)
+    }else {
+      await AsyncStorage.setItem(CART, JSON.stringify(cart))
+    }
+    return true
   } catch (error) {
     console.log(error);
     return null;

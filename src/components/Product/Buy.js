@@ -13,7 +13,6 @@ export default function Buy(props) {
   
   const addProductCart = async () => {
     const response = await addProductCartApi(product._id, quantity);
-    console.log("response: ", response);
 
     if (response) {
       Toast.show("Producto añadido al carrito", {

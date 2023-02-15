@@ -29,7 +29,6 @@ export default function SearchHistory(props) {
         { top: containerHeight },
       ]}
     >
-      {console.log(history)}
       {history && (
         map(history, (item, index) => (
           <TouchableNativeFeedback key={index} onPress={ () => onSearch(item.search)}>

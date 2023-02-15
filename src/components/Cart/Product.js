@@ -1,24 +1,37 @@
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
-import React from "react";
-import {deleteProductCartApi} from '../../api/cart'
+import React, { useEffect } from "react";
+import { deleteProductCartApi } from "../../api/cart";
 import { Button, IconButton } from "react-native-paper";
 import { API_URL } from "../../utils/constants";
+import { increaseProductCartApi, decreaseProductCartApi } from "../../api/cart";
 import colors from "../../styles/colors";
 
-
-
 export default function Product({ product, setReloadCart }) {
+  useEffect(() => {
+    setReloadCart(null);
+  });
+
   const calcPrice = (price, discount) => {
     if (!discount) return price;
     const discountAmount = (price * discount) / 100;
-  
     return (price - discountAmount).toFixed(3);
   };
-  
+
   const deleteProductCart = async () => {
-    const response = await deleteProductCartApi(product._id)
-    if(response) setReloadCart(true)
-  }
+    const response = await deleteProductCartApi(product._id);
+    if (response) setReloadCart(true);
+  };
+
+  const increaseProductCart = async () => {
+    const response = await increaseProductCartApi(product._id);
+    if (response) setReloadCart(true);
+  };
+
+  const decreaseProductCart = async () => {
+    const response = await decreaseProductCartApi(product._id);
+    if (response) setReloadCart(true);
+  };
+
   return (
     <View style={styles.product}>
       <View style={styles.containerImage}>
@@ -29,14 +42,26 @@ export default function Product({ product, setReloadCart }) {
       </View>
       <View style={styles.info}>
         <View>
-          <Text style={styles.name} numberOfLines={3} ellipsizeMode="tail">
-            {product.title}
-          </Text>
-        </View>
-        <View style={styles.price}>
-          <Text style={styles.currentPrice}>
-            {calcPrice(product.price, product.quantity)} CLP
-          </Text>
+          <View>
+            <Text style={styles.name} numberOfLines={3} ellipsizeMode="tail">
+              {product.title}
+            </Text>
+          </View>
+          <View style={styles.price}>
+            <Text style={styles.currentPrice}>
+              {calcPrice(product.price, product.discount)} CLP
+            </Text>
+          </View>
+
+          {product.discount && (
+            <View style={styles.containerDiscount}>
+              <Text style={styles.discountText}>Ahorras:</Text>
+              <Text style={styles.discountValue}>
+                {((product.price * product.discount) / 100).toFixed(3)} CLP (
+                {product.discount}%)
+              </Text>
+            </View>
+          )}
         </View>
 
         <View style={styles.btnsContainer}>
@@ -46,17 +71,22 @@ export default function Product({ product, setReloadCart }) {
               color="#fff"
               size={19}
               style={styles.btnQuantity}
+              onPress={increaseProductCart}
             />
-            <TextInput style={styles.inputQuantity} value={product.quantity.toString()} />
+            <TextInput
+              style={styles.inputQuantity}
+              value={product.quantity.toString()}
+            />
             <IconButton
               icon="minus"
               color="#fff"
               size={19}
               style={styles.btnQuantity}
+              onPress={decreaseProductCart}
             />
           </View>
-          <Button color="#b12704" mode="contained" onPress={() => deleteProductCart()}>
-              Eliminar
+          <Button color="#b12704" mode="contained" onPress={deleteProductCart}>
+            Eliminar
           </Button>
         </View>
       </View>
@@ -72,7 +102,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 0.5,
     borderColor: "#000",
-    backgroundColor: "#000"
+    backgroundColor: "#000",
+    padding: 7,
+    marginLeft: 10,
+    marginRight: 10,
   },
   containerImage: {
     width: "40%",
@@ -83,8 +116,9 @@ const styles = StyleSheet.create({
   image: {
     height: "100%",
     resizeMode: "contain",
-    borderRadius: 30
+    borderRadius: 30,
   },
+
   info: {
     padding: 10,
     width: "60%",
@@ -121,6 +155,20 @@ const styles = StyleSheet.create({
   inputQuantity: {
     paddingHorizontal: 10,
     fontSize: 16,
-    color: "#fff"
-  }
+    color: "#fff",
+  },
+  containerDiscount: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 5,
+  },
+  discountText: {
+    fontSize: 14,
+    color: "#747474",
+  },
+  discountValue: {
+    fontSize: 14,
+    color: "#747474",
+    paddingLeft: 5
+  },
 });

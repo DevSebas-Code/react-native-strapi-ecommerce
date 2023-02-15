@@ -13,6 +13,7 @@ export async function getAddressesApi(auth) {
     };
     const response = await fetch(url, params);
     const result = await response.json();
+    JSON.stringify(result)
     return result;
   } catch (error) {
     console.log(error);

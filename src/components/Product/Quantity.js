@@ -20,7 +20,7 @@ export default function Quantity(props) {
         listMode="SCROLLVIEW"
         defaultValue={quantity}
         open={open}
-        items={items}
+        items={items} 
         value={value}
         setOpen={setOpen}
         setValue={setValue}
@@ -33,9 +33,7 @@ export default function Quantity(props) {
         
         onChangeValue={(value) => {
           setQuantity(value);
-          console.log(value);
         }}
-        placeholder="Cantidad"
       />
     // </View>
   );

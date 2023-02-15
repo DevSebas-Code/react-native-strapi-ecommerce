@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: "#000",
     backgroundColor: "#000",
-
+    padding: 7,
 
   },
   containerImage: {

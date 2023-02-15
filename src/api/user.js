@@ -55,14 +55,12 @@ export async function getMeApi(token) {
     const response = await fetch(url, params);
     const result = await response.json();
 
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error);
     return null;
   }
 }
-
 
 export async function updateUserApi(auth, formData) {
   try {
@@ -71,20 +69,19 @@ export async function updateUserApi(auth, formData) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${auth.token}`
+        Authorization: `Bearer ${auth.token}`,
       },
-      body: JSON.stringify(formData)
-    }
-    const response = await fetch(url, params)
-    const result = await response.json()
-    console.log(result)
-    return result
+      body: JSON.stringify(formData),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    console.log(result);
+    return result;
   } catch (error) {
-    console.log(error)
-    return error
+    console.log(error);
+    return error;
   }
 }
-
 
 // export async function updateAdressApi(auth, formdata){
 //   try{

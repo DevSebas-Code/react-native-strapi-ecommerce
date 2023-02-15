@@ -4,7 +4,6 @@ import { map } from "lodash";
 import Product from "./Product";
 
 export default function FavoritesList({ products, setReloadFavorites }) {
- console.log("products: ", products)
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Lista de Favoritos</Text>
@@ -24,5 +23,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 19,
     marginBottom: 5,
+    padding: 5
   },
 });
